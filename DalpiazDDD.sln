@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalpiazDDD.API", "DalpiazDDD.API\DalpiazDDD.API.csproj", "{5B4049B5-F003-4042-B278-77079CC1976C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalpiazDDD.Application", "DalpiazDDD.Application\DalpiazDDD.Application.csproj", "{6EECE670-6798-499F-9FC0-4DFF37BE5D54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalpiazDDD.Domain", "DalpiazDDD.Domain\DalpiazDDD.Domain.csproj", "{DB24FFF2-4790-4AD8-B83F-5F8C26CCDE3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalpiazDDD.Domain.Core", "DalpiazDDD.Domain.Core\DalpiazDDD.Domain.Core.csproj", "{6A10FAED-9AD4-4FEB-8038-6F9688BB0700}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalpiazDDD.Domain.Services", "DalpiazDDD.Domain.Services\DalpiazDDD.Domain.Services.csproj", "{86410D88-C36F-4C2C-90BC-55A102242066}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalpiazDDD.Infrastructure", "DalpiazDDD.Infrastructure\DalpiazDDD.Infrastructure.csproj", "{733308B1-D008-4C7F-8C01-D0D55710662F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalpiazDDD.Tests", "DalpiazDDD.Tests\DalpiazDDD.Tests.csproj", "{962E9E65-C04B-4A0E-A38B-02CCB6646674}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B4049B5-F003-4042-B278-77079CC1976C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4049B5-F003-4042-B278-77079CC1976C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4049B5-F003-4042-B278-77079CC1976C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4049B5-F003-4042-B278-77079CC1976C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EECE670-6798-499F-9FC0-4DFF37BE5D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EECE670-6798-499F-9FC0-4DFF37BE5D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EECE670-6798-499F-9FC0-4DFF37BE5D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EECE670-6798-499F-9FC0-4DFF37BE5D54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB24FFF2-4790-4AD8-B83F-5F8C26CCDE3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB24FFF2-4790-4AD8-B83F-5F8C26CCDE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB24FFF2-4790-4AD8-B83F-5F8C26CCDE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB24FFF2-4790-4AD8-B83F-5F8C26CCDE3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A10FAED-9AD4-4FEB-8038-6F9688BB0700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A10FAED-9AD4-4FEB-8038-6F9688BB0700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A10FAED-9AD4-4FEB-8038-6F9688BB0700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A10FAED-9AD4-4FEB-8038-6F9688BB0700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86410D88-C36F-4C2C-90BC-55A102242066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86410D88-C36F-4C2C-90BC-55A102242066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86410D88-C36F-4C2C-90BC-55A102242066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86410D88-C36F-4C2C-90BC-55A102242066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733308B1-D008-4C7F-8C01-D0D55710662F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733308B1-D008-4C7F-8C01-D0D55710662F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733308B1-D008-4C7F-8C01-D0D55710662F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733308B1-D008-4C7F-8C01-D0D55710662F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{962E9E65-C04B-4A0E-A38B-02CCB6646674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{962E9E65-C04B-4A0E-A38B-02CCB6646674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{962E9E65-C04B-4A0E-A38B-02CCB6646674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{962E9E65-C04B-4A0E-A38B-02CCB6646674}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2651FFC7-4C47-4356-A290-A84D22CFE5BC}
+	EndGlobalSection
+EndGlobal

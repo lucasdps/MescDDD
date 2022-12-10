@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="CrossCutting\Interfaces\" />
+    <Folder Include="CrossCutting\Mapper\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DalpiazDDD.Application\DalpiazDDD.Application.csproj" />
+    <ProjectReference Include="..\DalpiazDDD.Domain.Core\DalpiazDDD.Domain.Core.csproj" />
+    <ProjectReference Include="..\DalpiazDDD.Domain.Services\DalpiazDDD.Domain.Services.csproj" />
+    <ProjectReference Include="..\DalpiazDDD.Domain\DalpiazDDD.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
