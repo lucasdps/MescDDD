@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalpiazDDD.Domain.Entitys
+namespace DalpiazDDD.Domain.Entitys.ConjuntoResultado
 {
-    public class Base
+    public class AnaliseOperacao
     {
         public int Id { get; set; }
+        public int Realizada { get; set; }
     }
 }

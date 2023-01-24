@@ -10,8 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 // Register services directly with Autofac here. Don't
 // call builder.Populate(), that happens in AutofacServiceProviderFactory.
-var connection = builder.Configuration["SqlConnection:SqlConnectionString"];
-builder.Services.AddDbContext<SqlContext>(options => options.UseSqlServer(connection));
+//var connection = builder.Configuration["SqlConnection:SqlConnectionString"];
+var connection = builder.Configuration["SqlConnection:Postgresql"];
+builder.Services.AddDbContext<SqlContext>(options => options.UseNpgsql(connection));
 
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ModuleIOC()));
 
@@ -23,6 +24,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true); //Para o erro de DateTime do Postgres => Cannot write DateTime with Kind=UTC to PostgreSQL type 'timestamp without time zone'
 
 app.UseCors(options => {
     //options.WithOrigins("http://localhost:3000");
