@@ -26,7 +26,7 @@ namespace DalpiazDDD.Domain.Services
             Entrada entrada = conjuntoEntrada.Entrada;
             //entrada.MontarEntrada(null);
 
-            AnaliseResultado analiseResultado = new AnaliseResultado();
+            ConjuntoResultado analiseResultado = new ConjuntoResultado();
 
             // Create the linear solver with the SCIP backend.
             Solver solver = Solver.CreateSolver("SCIP");
@@ -374,15 +374,35 @@ namespace DalpiazDDD.Domain.Services
 
             analiseResultado.ValorFuncaoObjetivo = (int) solver.Objective().Value();
 
+            analiseResultado.TempoMilisegundos = (int)solver.WallTime();
+            analiseResultado.Iteracoes = (int)solver.Iterations();
+            analiseResultado.Nodes = (int)solver.Nodes();
+            Console.WriteLine("\nAdvanced usage:");
+            Console.WriteLine("Problem solved in " + solver.WallTime() + " milliseconds");
+            Console.WriteLine("Problem solved in " + solver.Iterations() + " iterations");
+            Console.WriteLine("Problem solved in " + solver.Nodes() + " branch-and-bound nodes");
+
+            analiseResultado.IdConjuntoEntrada = conjuntoEntrada.Id;
+            analiseResultado.Descricao = $"[{analiseResultado.TempoMilisegundos}-{analiseResultado.Iteracoes}-{analiseResultado.Nodes}-{analiseResultado.ValorFuncaoObjetivo}]";
+
+
+            this.repositoryConjuntoResultado.Add(analiseResultado);
+
             //Variável de decisão binária que informa se a operação foi realizada
             analiseResultado.u_o = new List<AnaliseOperacao>();
             for (int i = 0; i < entrada.QtdOperacoes; i++)
             {
-                var a = new AnaliseOperacao();
-                a.Id = i; 
-                a.Realizada = (int) u_o[i].SolutionValue();
+                if ((int)u_o[i].SolutionValue()==1)
+                {
+                    var a = new AnaliseOperacao();
+                    a.OperacaoId = i;
+                    a.Realizada = (int)u_o[i].SolutionValue();
+                    analiseResultado.u_o.Add(a);
+                }
+                
             }
 
+            this.repositoryConjuntoResultado.Update(analiseResultado);
 
             //recuperando variável de decisão binária que informa se o equipamento foi usado na operação
             analiseResultado.x = new List<AnaliseOperacaoEquipamento>();
@@ -390,12 +410,16 @@ namespace DalpiazDDD.Domain.Services
             {
                 for (int j = 0; j < entrada.QtdEquipamentos; j++)
                 {
-                    var a = new AnaliseOperacaoEquipamento();
-                    a.Realizada =(int) x[i, j].SolutionValue();
-                    a.OperacaoId = i;
-                    a.EquipamentoId = j;
-                    analiseResultado.x.Add(a);
+                    if ((int)x[i, j].SolutionValue()==1)
+                    {
+                        var a = new AnaliseOperacaoEquipamento();
+                        a.Realizada = (int)x[i, j].SolutionValue();
+                        a.OperacaoId = i;
+                        a.EquipamentoId = j;
+                        analiseResultado.x.Add(a);
+                    }
                 }
+                this.repositoryConjuntoResultado.Update(analiseResultado);
             }
 
             //variável de decisão linear que informa se a fp foi usada na operação
@@ -404,12 +428,16 @@ namespace DalpiazDDD.Domain.Services
             {
                 for (int j = 0; j < entrada.QtdFP; j++)
                 {
-                    var a = new AnaliseOperacaoFP();
-                    a.Realizada = (int)u_fp_o[i, j].SolutionValue();
-                    a.OperacaoId = i;
-                    a.FpId = j;
-                    analiseResultado.u_fp_o.Add(a);
+                    if ((int)u_fp_o[i, j].SolutionValue()==1)
+                    {
+                        var a = new AnaliseOperacaoFP();
+                        a.Realizada = (int)u_fp_o[i, j].SolutionValue();
+                        a.OperacaoId = i;
+                        a.FpId = j;
+                        analiseResultado.u_fp_o.Add(a);
+                    }
                 }
+                this.repositoryConjuntoResultado.Update(analiseResultado);
             }
 
             //variável de decisão linear que informa se a fs foi usada na operação
@@ -418,65 +446,69 @@ namespace DalpiazDDD.Domain.Services
             {
                 for (int j = 0; j < entrada.QtdFS; j++)
                 {
-                    var a = new AnaliseOperacaoFS();
-                    a.Realizada=(int)u_fs_o[i, j].SolutionValue();
-                    a.OperacaoId = i;
-                    a.FsId = j;
-                    analiseResultado.u_fs_o.Add(a);
+                    if ((int)u_fs_o[i, j].SolutionValue()==1)
+                    {
+                        var a = new AnaliseOperacaoFS();
+                        a.Realizada = (int)u_fs_o[i, j].SolutionValue();
+                        a.OperacaoId = i;
+                        a.FsId = j;
+                        analiseResultado.u_fs_o.Add(a);
+                    }
+                    
                 }
+                this.repositoryConjuntoResultado.Update(analiseResultado);
             }
 
             //variável de decisão binária que indica se a ferramenta primária está associada ao equipamento na operação
-            analiseResultado.y = new List<AnaliseOperacaoEquipamentoFP>();
-            for (int i = 0; i < entrada.QtdOperacoes; i++)
-            {
-                for (int e = 0; e < entrada.QtdEquipamentos; e++)
-                {
-                    for (int j = 0; j < entrada.QtdFP; j++)
-                    {
-                        var a = new AnaliseOperacaoEquipamentoFP();
-                        a.Realizada =(int) y[i, e, j].SolutionValue();
-                        a.OperacaoId = i;
-                        a.EquipamentoId = e;
-                        a.FpId = j;
-                        analiseResultado.y.Add(a);
+            //analiseResultado.y = new List<AnaliseOperacaoEquipamentoFP>();
+            //for (int i = 0; i < entrada.QtdOperacoes; i++)
+            //{
+            //    for (int e = 0; e < entrada.QtdEquipamentos; e++)
+            //    {
+            //        for (int j = 0; j < entrada.QtdFP; j++)
+            //        {
+            //            var a = new AnaliseOperacaoEquipamentoFP();
+            //            a.Realizada =(int) y[i, e, j].SolutionValue();
+            //            a.OperacaoId = i;
+            //            a.EquipamentoId = e;
+            //            a.FpId = j;
+            //            analiseResultado.y.Add(a);
 
-                    }
-                }
-            }
+            //        }
+            //        this.repositoryConjuntoResultado.Update(analiseResultado);
+            //    }
+                
+            //}
 
             //variável de decisão binária que indica se a ferramenta secundária está associada à ferramenta primária
-            analiseResultado.z = new List<AnaliseOperacaoEquipamentoFS>();
-            for (int i = 0; i < entrada.QtdOperacoes; i++)
+            //analiseResultado.z = new List<AnaliseOperacaoEquipamentoFS>();
+            //for (int i = 0; i < entrada.QtdOperacoes; i++)
+            //{
+            //    for (int e = 0; e < entrada.QtdFP; e++)
+            //    {
+            //        for (int j = 0; j < entrada.QtdFS; j++)
+            //        {
+            //            var a = new AnaliseOperacaoEquipamentoFS();
+            //            a.Realizada = (int)z[i, e, j].SolutionValue();
+            //            a.OperacaoId = i;
+            //            a.EquipamentoId = e;
+            //            a.FsId = j;
+            //            analiseResultado.z.Add(a);
+            //        }
+            //        this.repositoryConjuntoResultado.Update(analiseResultado);
+            //    }
+                
+            //}
+
+            
+            try
             {
-                for (int e = 0; e < entrada.QtdFP; e++)
-                {
-                    for (int j = 0; j < entrada.QtdFS; j++)
-                    {
-                        var a = new AnaliseOperacaoEquipamentoFS();
-                        a.Realizada = (int)z[i, e, j].SolutionValue();
-                        a.OperacaoId = i;
-                        a.EquipamentoId = e;
-                        a.FsId = j;
-                        analiseResultado.z.Add(a);
-                    }
-                }
+                
             }
-
-            analiseResultado.TempoMilisegundos =(int) solver.WallTime();
-            analiseResultado.Iteracoes = (int)solver.Iterations();
-            analiseResultado.Nodes = (int)solver.Nodes();
-            Console.WriteLine("\nAdvanced usage:");
-            Console.WriteLine("Problem solved in " + solver.WallTime() + " milliseconds");
-            Console.WriteLine("Problem solved in " + solver.Iterations() + " iterations");
-            Console.WriteLine("Problem solved in " + solver.Nodes() + " branch-and-bound nodes");
-
-            this.repositoryConjuntoResultado.Add(new ConjuntoResultado
+            catch (Exception ex)
             {
-                AnaliseResultado = analiseResultado,
-                IdConjuntoEntrada = conjuntoEntrada.Id,
-                Descricao = $"[{analiseResultado.TempoMilisegundos}-{analiseResultado.Iteracoes}-{analiseResultado.Nodes}-{analiseResultado.ValorFuncaoObjetivo}]",
-            });
+
+            }
 
             return true;
         }

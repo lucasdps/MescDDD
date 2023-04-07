@@ -1,5 +1,6 @@
 ﻿using DalpiazDDD.Domain.Core.Interfaces.Repositorys;
 using DalpiazDDD.Domain.Core.Interfaces.Services;
+using DalpiazDDD.Domain.Entitys.ComporEntrada;
 using DalpiazDDD.Domain.Entitys.ConjuntoEntrada;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,12 @@ namespace DalpiazDDD.Domain.Services
         public ServiceConjuntoEntrada(IRepositoryConjuntoEntrada repositoryConjuntoEntrada) : base(repositoryConjuntoEntrada)
         {
             this.repositoryConjuntoEntrada = repositoryConjuntoEntrada;
+        }
+
+        public IEnumerable<Operacao> ListaOperacoes(int idEntrada)
+        {
+            return this.repositoryConjuntoEntrada.ListaOperacoes(idEntrada);
+
         }
     }
 }

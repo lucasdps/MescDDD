@@ -15,7 +15,7 @@ namespace DalpiazDDD.Domain.Entitys.ConjuntoEntrada
         public string Descricao { get; set; }
         public DateTime DataCadastro { get; set; }
 
-        public IEnumerable<ConjuntoResultado.ConjuntoResultado> ConjuntoResultados { get; set; }
+        public ICollection<ConjuntoResultado.ConjuntoResultado> ConjuntoResultados { get; set; }
 
     }
 }

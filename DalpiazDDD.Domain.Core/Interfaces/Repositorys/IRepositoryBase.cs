@@ -11,5 +11,7 @@
         IEnumerable<TEntity> GetAll();
 
         TEntity GetById(int id);
+
+
     }
 }

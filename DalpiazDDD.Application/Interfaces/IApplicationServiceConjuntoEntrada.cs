@@ -1,4 +1,5 @@
 ﻿using DalpiazDDD.Application.Dtos;
+using DalpiazDDD.Domain.Entitys.ComporEntrada;
 using DalpiazDDD.Domain.Entitys.ConjuntoEntrada;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace DalpiazDDD.Application.Interfaces
         ConjuntoEntradaDto GetById(int id);
         ConjuntoEntrada GetByIdCompleto(int id);
         ConjuntoEntradaPrevisualizacaoDto GetByIdPrevisualizacao(int id);
+
+        IEnumerable<Operacao> ListaOperacoes(int idEntrada);
 
     }
 }

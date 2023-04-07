@@ -23,9 +23,12 @@ namespace DalpiazDDD.API.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
+            var inicio = DateTime.Now;
             var conjuntoEntrada = applicationServiceConjuntoEntrada.GetByIdCompleto(id);
             applicationServiceCalculoProgramacaoLinear.Executar(conjuntoEntrada);
-            return Ok();
+            var fim = DateTime.Now;
+            var tempoTotal = inicio.Subtract(fim);
+            return Ok($"Início: {inicio}. Fim: {fim}. Tempo total da execução: {tempoTotal}.");
         }
     }
 }

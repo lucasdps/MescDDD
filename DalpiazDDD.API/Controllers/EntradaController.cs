@@ -1,6 +1,7 @@
 ﻿using DalpiazDDD.Application;
 using DalpiazDDD.Application.Dtos;
 using DalpiazDDD.Application.Interfaces;
+using DalpiazDDD.Domain.Entitys.ComporEntrada;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,12 @@ namespace DalpiazDDD.API.Controllers
         public ActionResult<IEnumerable<string>> Get()
         {
             return Ok(applicationServiceConjuntoEntrada.GetAllPrevisualizacao());
+        }
+
+        [HttpGet("ListaOperacoes")]
+        public ActionResult<IEnumerable<string>> ListaOperacoes(int id, int tipo)
+        {
+            return Ok(applicationServiceConjuntoEntrada.ListaOperacoes(id));
         }
 
         // GET api/values/5

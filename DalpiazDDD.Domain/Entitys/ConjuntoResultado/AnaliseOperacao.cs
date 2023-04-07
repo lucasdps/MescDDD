@@ -9,6 +9,10 @@ namespace DalpiazDDD.Domain.Entitys.ConjuntoResultado
     public class AnaliseOperacao
     {
         public int Id { get; set; }
+        public int OperacaoId { get; set; }
         public int Realizada { get; set; }
+
+        public int ConjuntoResultadoId { get; set; }
+        public ConjuntoResultado ConjuntoResultado { get; set; }
     }
 }

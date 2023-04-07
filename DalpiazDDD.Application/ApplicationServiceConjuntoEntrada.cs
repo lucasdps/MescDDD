@@ -2,6 +2,7 @@
 using DalpiazDDD.Application.Interfaces;
 using DalpiazDDD.Application.Interfaces.Mappers;
 using DalpiazDDD.Domain.Core.Interfaces.Services;
+using DalpiazDDD.Domain.Entitys.ComporEntrada;
 using DalpiazDDD.Domain.Entitys.ConjuntoEntrada;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,11 @@ namespace DalpiazDDD.Application
         {
             var conjuntoEntrada = serviceConjuntoEntrada.GetById(id);
             return mapperConjuntoEntrada.MapperEntityToDtoPrevisualizacao(conjuntoEntrada);
+        }
+
+        public IEnumerable<Operacao> ListaOperacoes(int idEntrada)
+        {
+           return serviceConjuntoEntrada.ListaOperacoes(idEntrada);
         }
 
         public void Remove(int id)

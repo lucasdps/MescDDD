@@ -33,7 +33,10 @@ namespace DalpiazDDD.Infrastructure.CrossCutting.IOC
             builder.RegisterType<RepositoryConjuntoEntrada>().As<IRepositoryConjuntoEntrada>();
             builder.RegisterType<MapperConjuntoEntrada>().As<IMapperConjuntoEntrada>();
 
+            builder.RegisterType<ApplicationServiceConjuntoResultado>().As<IApplicationServiceConjuntoResultado>();
+            builder.RegisterType<ServiceConjuntoResultado>().As<IServiceConjuntoResultado>();
             builder.RegisterType<RepositoryConjuntoResultado>().As<IRepositoryConjuntoResultado>();
+            builder.RegisterType<MapperConjuntoResultado>().As<IMapperConjuntoResultado>();
 
             #endregion IOC
         }
