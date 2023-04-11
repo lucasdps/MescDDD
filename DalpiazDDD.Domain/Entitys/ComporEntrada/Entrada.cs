@@ -172,15 +172,40 @@ namespace DalpiazDDD.Domain.Entitys.ComporEntrada
             this.TotalTipoModeloFP = TipoModeloFPs.Count();
             this.TotalTipoModeloFS = TipoModeloFPs.Count();
 
-            IList<FormulaAssociarOperacaoEquipamento> listASS_OEs = new List<FormulaAssociarOperacaoEquipamento>(); 
-            Operacoes.ToList().ForEach( oitem => {
-                Equipamentos.ToList().ForEach( eitem=> {
-                    var obj = AssociarOperacaoEquipamentos.FirstOrDefault(x => x.IdOperacao == oitem.Id && x.IdEquipamento == eitem.Id);
-                    listASS_OEs.Add(new FormulaAssociarOperacaoEquipamento {
-                        IdEquipamento = eitem.Id,
-                        IdOperacao = oitem.Id,
-                        Situacao = obj == null ? 0 : 1
-                }) ;
+            IList<FormulaAssociarOperacaoEquipamento> listASS_OEs = new List<FormulaAssociarOperacaoEquipamento>();
+            //var contador_teste = 1;
+            //Operacoes.ToList().ForEach( oitem => {
+            //    Equipamentos.ToList().ForEach( eitem=> {
+            //        try
+            //        {
+            //            var obj = AssociarOperacaoEquipamentos.FirstOrDefault(x => x. && x.IdOperacao == oitem.Id && x.IdEquipamento == eitem.Id);
+            //            if (obj!=null)
+            //            {
+            //                listASS_OEs.Add(new FormulaAssociarOperacaoEquipamento
+            //                {
+            //                    IdEquipamento = eitem.Id,
+            //                    IdOperacao = oitem.Id,
+            //                    Situacao = obj == null ? 0 : 1
+
+            //                });
+            //            }
+            //            contador_teste++;
+            //        }
+            //        catch (Exception ex)
+            //        {
+
+
+            //        }
+            //    });
+            //});
+
+            AssociarOperacaoEquipamentos.ToList().ForEach(aoe=> {
+                listASS_OEs.Add(new FormulaAssociarOperacaoEquipamento
+                {
+                    IdEquipamento = aoe.IdEquipamento,
+                    IdOperacao = aoe.IdOperacao,
+                    Situacao = 1
+
                 });
             });
             ASS_OEs = listASS_OEs.ToArray();
@@ -266,12 +291,19 @@ namespace DalpiazDDD.Domain.Entitys.ComporEntrada
                 {
                     var coli_2 = Operacoes.Single(a => a.Id == o2 + 1);
 
-                    listaCOL_OPER.Add(new FormulaColisaoOperacao
+                    var verificaCol = VerificaColisaoOperacao(coli_1, coli_2);
+
+                    if (verificaCol==1)
                     {
-                        IdOperacao1 = o1 + 1,
-                        IdOperacao2 = o2 + 1,
-                        Colisao = VerificaColisaoOperacao(coli_1,coli_2)
-                    });
+                        listaCOL_OPER.Add(new FormulaColisaoOperacao
+                        {
+                            IdOperacao1 = o1 + 1,
+                            IdOperacao2 = o2 + 1,
+                            Colisao = verificaCol
+                        });
+                    }
+
+                    
                 }
             }
             COL_OPER = listaCOL_OPER;
@@ -295,12 +327,17 @@ namespace DalpiazDDD.Domain.Entitys.ComporEntrada
                 {
                     var _fp = ManutencaoFPs.Single(a => a.Id == fp + 1);
 
-                    listaCOL_OPER_FP.Add(new FormulaColisaoOperacaoFP
+                    var verificaCol = VerificaColisaoOperacaoFP(coli, _fp);
+                    if (verificaCol==1)
                     {
-                        IdOperacao = o + 1,
-                        IdFP = fp + 1,
-                        Colisao = VerificaColisaoOperacaoFP(coli, _fp)
-                    });
+                        listaCOL_OPER_FP.Add(new FormulaColisaoOperacaoFP
+                        {
+                            IdOperacao = o + 1,
+                            IdFP = fp + 1,
+                            Colisao = verificaCol
+                        });
+                    }
+                    
                 }
             }
             COL_OPER_FP = listaCOL_OPER_FP;
@@ -322,12 +359,17 @@ namespace DalpiazDDD.Domain.Entitys.ComporEntrada
                 {
                     var _fs = ManutencaoFSs.Single(a => a.Id == fs + 1);
 
-                    listaCOL_OPER_FS.Add(new FormulaColisaoOperacaoFS
+                    var verificaCol = VerificaColisaoOperacaoFS(coli, _fs);
+                    if (verificaCol == 1)
                     {
-                        IdOperacao = o + 1,
-                        IdFS = fs + 1,
-                        Colisao = VerificaColisaoOperacaoFS(coli, _fs)
-                    });
+                        listaCOL_OPER_FS.Add(new FormulaColisaoOperacaoFS
+                        {
+                            IdOperacao = o + 1,
+                            IdFS = fs + 1,
+                            Colisao = verificaCol
+                        });
+                    }
+                    
                 }
             }
             COL_OPER_FS = listaCOL_OPER_FS;

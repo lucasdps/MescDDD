@@ -23,5 +23,10 @@ namespace DalpiazDDD.Domain.Services
             return this.repositoryConjuntoEntrada.ListaOperacoes(idEntrada);
 
         }
+
+        public ConjuntoEntrada UltimoAdicionado()
+        {
+            return this.repositoryConjuntoEntrada.UltimoAdicionado();
+        }
     }
 }

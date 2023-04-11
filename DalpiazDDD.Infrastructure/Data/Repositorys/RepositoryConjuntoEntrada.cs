@@ -26,13 +26,23 @@ namespace DalpiazDDD.Infrastructure.Data.Repositorys
 
             var r = from i in this.sqlContext.ConjuntoEntradas
                     where i.Id == idEntrada
-                    select i.Entrada;
+                    select i.Operacoes;
                     //select new { i.Entrada.Operacoes };
 
 
             
-            return r.FirstOrDefault().Operacoes.ToArray();
+            return r.FirstOrDefault().ToArray();
          
+        }
+
+        public ConjuntoEntrada UltimoAdicionado()
+        {
+
+            var r = this.sqlContext.ConjuntoEntradas.OrderByDescending(x => x.Id).First();
+                 
+
+            return r;
+
         }
     }
 }

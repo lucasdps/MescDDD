@@ -11,5 +11,7 @@ namespace DalpiazDDD.Domain.Core.Interfaces.Repositorys
     public interface IRepositoryConjuntoEntrada : IRepositoryBase<ConjuntoEntrada>
     {
         IEnumerable<Operacao> ListaOperacoes(int idEntrada);
+
+        ConjuntoEntrada UltimoAdicionado();
     }
 }

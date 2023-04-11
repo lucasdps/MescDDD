@@ -35,7 +35,7 @@ namespace DalpiazDDD.Infrastructure.Data.Repositorys
 
                 var entrada = from i in this.sqlContext.ConjuntoEntradas
                         where i.Id == listU_o.First().idEntrada
-                        select i.Entrada;
+                        select i;
 
 
                 var operacao = entrada.First().Operacoes;
@@ -65,7 +65,7 @@ namespace DalpiazDDD.Infrastructure.Data.Repositorys
 
                 var entrada = from i in this.sqlContext.ConjuntoEntradas
                               where i.Id == listU_o.First().idEntrada
-                              select i.Entrada;
+                              select i;
 
 
                 var operacao = entrada.First().Operacoes;
@@ -100,7 +100,7 @@ namespace DalpiazDDD.Infrastructure.Data.Repositorys
 
                 var entrada = from i in this.sqlContext.ConjuntoEntradas
                               where i.Id == list_entrada.First().Id
-                              select i.Entrada;
+                              select i;
 
 
                 var operacao = entrada.First().Operacoes;
@@ -153,7 +153,7 @@ namespace DalpiazDDD.Infrastructure.Data.Repositorys
 
                 var entrada = from i in this.sqlContext.ConjuntoEntradas
                               where i.Id == list_entrada.First().Id
-                              select i.Entrada;
+                              select i;
 
 
                 var operacao = entrada.First().Operacoes;

@@ -30,7 +30,21 @@ namespace DalpiazDDD.Application
             //conjuntoEntradaDto.Id = null;
             conjuntoEntradaCadastroDto.DataCadastro = DateTime.Now;
             var conjuntoEntrada = mapperConjuntoEntrada.MapperDtoToEntityAdd(conjuntoEntradaCadastroDto);
+
+            var aux = new ConjuntoEntrada();
+            //aux.COL_OPER = conjuntoEntrada.COL_OPER;
+
+            //conjuntoEntrada.COL_OPER = null;
+
+
+
             serviceConjuntoEntrada.Add(conjuntoEntrada);
+
+            //var ultimo = serviceConjuntoEntrada.UltimoAdicionado();
+            //ultimo.COL_OPER = aux.COL_OPER;
+            //serviceConjuntoEntrada.Update(ultimo);
+
+
         }
 
         public IEnumerable<ConjuntoEntradaDto> GetAll()

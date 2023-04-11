@@ -42,13 +42,16 @@ namespace DalpiazDDD.API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] ConjuntoEntradaCadastroDto conjuntoEntradaCadastroDto)
         {
+            var inicio = DateTime.Now;
             try
             {
                 if (conjuntoEntradaCadastroDto == null)
                     return NotFound();
 
                 applicationServiceConjuntoEntrada.Add(conjuntoEntradaCadastroDto);
-                return Ok();
+                var fim = DateTime.Now;
+                var tempoTotal = fim.Subtract(inicio);
+                return Ok($"Início: {inicio}. Fim: {fim}. Tempo total da execução: {tempoTotal}.");
             }
             catch (Exception ex)
             {

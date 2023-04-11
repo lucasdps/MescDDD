@@ -11,5 +11,7 @@ namespace DalpiazDDD.Domain.Core.Interfaces.Services
     public interface IServiceConjuntoEntrada : IServiceBase<ConjuntoEntrada>
     {
         IEnumerable<Operacao> ListaOperacoes(int idEntrada);
+
+        ConjuntoEntrada UltimoAdicionado();
     }
 }

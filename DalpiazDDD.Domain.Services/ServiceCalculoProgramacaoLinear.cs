@@ -20,10 +20,9 @@ namespace DalpiazDDD.Domain.Services
         {
             this.repositoryConjuntoResultado = repositoryConjuntoResultado;
         }
-        public bool ExecutarOrTools(ConjuntoEntrada conjuntoEntrada)
+        public bool ExecutarOrTools(ConjuntoEntrada entrada)
         {
-
-            Entrada entrada = conjuntoEntrada.Entrada;
+            
             //entrada.MontarEntrada(null);
 
             ConjuntoResultado analiseResultado = new ConjuntoResultado();
@@ -31,6 +30,7 @@ namespace DalpiazDDD.Domain.Services
             // Create the linear solver with the SCIP backend.
             Solver solver = Solver.CreateSolver("SCIP");
             solver.EnableOutput();
+            //solver.SetSolverSpecificParametersAsString("limits/memory=8000");
 
             #region variaveis_decisao
 
@@ -107,7 +107,16 @@ namespace DalpiazDDD.Domain.Services
             {
                 for (int o = 0; o < entrada.QtdOperacoes; o++)
                 {
-                    solver.Add(x[o, e] == (u_o[o] * entrada.ASS_OEs.Single(a => a.IdEquipamento == (e + 1) && a.IdOperacao == (o + 1)).Situacao));
+                    var item = entrada.ASS_OEs.FirstOrDefault(a => a.IdEquipamento == (e + 1) && a.IdOperacao == (o + 1));
+                    if (item != null)
+                    {
+                        solver.Add(x[o, e] == (u_o[o] * item.Situacao));
+                    }
+                    else
+                    {
+                        solver.Add(x[o, e] == 0);
+                    }
+                    
                 }
             }
 
@@ -382,7 +391,7 @@ namespace DalpiazDDD.Domain.Services
             Console.WriteLine("Problem solved in " + solver.Iterations() + " iterations");
             Console.WriteLine("Problem solved in " + solver.Nodes() + " branch-and-bound nodes");
 
-            analiseResultado.IdConjuntoEntrada = conjuntoEntrada.Id;
+            analiseResultado.IdConjuntoEntrada = entrada.Id;
             analiseResultado.Descricao = $"[{analiseResultado.TempoMilisegundos}-{analiseResultado.Iteracoes}-{analiseResultado.Nodes}-{analiseResultado.ValorFuncaoObjetivo}]";
 
 

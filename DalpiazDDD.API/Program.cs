@@ -25,7 +25,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true); //Para o erro de DateTime do Postgres => Cannot write DateTime with Kind=UTC to PostgreSQL type 'timestamp without time zone'
+
 
 app.UseCors(options => {
     //options.WithOrigins("http://localhost:3000");
@@ -48,3 +51,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
