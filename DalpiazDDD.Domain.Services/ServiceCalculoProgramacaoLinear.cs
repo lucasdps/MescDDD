@@ -394,6 +394,7 @@ namespace DalpiazDDD.Domain.Services
             analiseResultado.IdConjuntoEntrada = entrada.Id;
             analiseResultado.Descricao = $"[{analiseResultado.TempoMilisegundos}-{analiseResultado.Iteracoes}-{analiseResultado.Nodes}-{analiseResultado.ValorFuncaoObjetivo}]";
 
+            analiseResultado.ConjuntoEntrada = null;
 
             this.repositoryConjuntoResultado.Add(analiseResultado);
 

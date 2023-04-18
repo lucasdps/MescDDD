@@ -51,7 +51,8 @@ namespace DalpiazDDD.API.Controllers
                 applicationServiceConjuntoEntrada.Add(conjuntoEntradaCadastroDto);
                 var fim = DateTime.Now;
                 var tempoTotal = fim.Subtract(inicio);
-                return Ok($"Início: {inicio}. Fim: {fim}. Tempo total da execução: {tempoTotal}.");
+                Console.WriteLine($"Início: {inicio}. Fim: {fim}. Tempo total da execução: {tempoTotal}.");
+                return Ok();
             }
             catch (Exception ex)
             {

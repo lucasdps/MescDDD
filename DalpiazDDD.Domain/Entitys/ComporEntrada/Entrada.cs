@@ -65,7 +65,7 @@ namespace DalpiazDDD.Domain.Entitys.ComporEntrada
             }
             else
             {
-                file = @"C:\Users\siste\source\repos\LPProblemGoogle\" + file;
+                file = @"D:\Entradas Mesc\" + file;
             }
             
             using (ExcelPackage package = new ExcelPackage(new FileInfo(file)))

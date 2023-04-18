@@ -27,8 +27,9 @@ namespace DalpiazDDD.API.Controllers
             var conjuntoEntrada = applicationServiceConjuntoEntrada.GetByIdCompleto(id);
             applicationServiceCalculoProgramacaoLinear.Executar(conjuntoEntrada);
             var fim = DateTime.Now;
-            var tempoTotal = inicio.Subtract(fim);
-            return Ok($"Início: {inicio}. Fim: {fim}. Tempo total da execução: {tempoTotal}.");
+            var tempoTotal = fim.Subtract(inicio);
+            return $"Início: {inicio}. Fim: {fim}. Tempo total da execução: {tempoTotal}.";
+            return Ok();
         }
     }
 }
